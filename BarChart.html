@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: center; margin-top: 50px">
+      <div style="width: 700px"><canvas id="myChart"></canvas></div>
+    </div>
+
+    <script>
+      const ctx = document.getElementById("myChart").getContext("2d");
+      const data = [
+        { year: 2010, count: 10 },
+        { year: 2011, count: 20 },
+        { year: 2012, count: 15 },
+        { year: 2013, count: 25 },
+        { year: 2014, count: 22 },
+        { year: 2015, count: 30 },
+        { year: 2016, count: 28 },
+      ];
+      const myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: data.map((row) => row.year),
+          datasets: [
+            {
+              label: "Acquisitions by year",
+              data: data.map((row) => row.count),
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+        // options: {
+        //   indexAxis: "y",
+        // },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <title>File Upload Example with Dropzone.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/uppy@1.32.0/dist/uppy.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uppy@1.32.0/dist/uppy.min.css"
+    />
+    <link rel="stylesheet" href="fileupload.css" />
+  </head>
+  <body>
+    <div>Hi This is Example for File Uploading</div>
+
+    <div>
+      <form class="form-file" enctype="multipart/form-data">
+        <div class="image-input">
+          <label for="file">File:</label>
+          <input
+            accept="image/*"
+            type="file"
+            id="imgInp"
+            onchange="getBase64(event)"
+            multiple
+          />
+          <div class="img-preview">
+            <img id="blob" src="#" alt="your image" />
+          </div>
+        </div>
+        <div class="upload-button">
+          <button>Upload</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function getBase64(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          alert(reader.result);
+          var img = document.getElementById("blob");
+          img.setAttribute("src", reader.result);
+        };
+        reader.onerror = function (error) {
+          console.log("Error: ", error);
+        };
+        if (event.target.files[0]) {
+          reader.readAsDataURL(event.target.files[0]);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ag Grid App</title>
+    <!-- Include the JS for AG Grid -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <!-- Include the core CSS, this is needed by the grid -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css"
+    />
+    <!-- Include the theme CSS, only need to import the theme you are going to use -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css"
+    />
+  </head>
+  <body>
+    <div><h1>This is Ag-grid example</h1></div>
+    <div>
+      <div>
+        <div id="myGrid" class="ag-theme-alpine" style="height: 450px"></div>
+      </div>
+    </div>
+
+    <script>
+      const gridOptions = {
+        columnDefs: [
+          { field: "name" },
+          { field: "username" },
+          { field: "email" },
+          { field: "phone" },
+          { field: "companiesId" }, //
+          { field: "password" },
+        ],
+        defaultColDef: { sortable: true, filter: true, minWidth: 5 },
+        rowSelection: "multiple",
+        animateRows: true,
+        pagination: true,
+        paginationPageSize: 9,
+
+        onCellClicked: (params) => {
+          console.log("cell was clicked", params);
+        },
+      };
+      const eGridDiv = document.getElementById("myGrid");
+      new agGrid.Grid(eGridDiv, gridOptions);
+      fetch("https://6426d11d556bad2a5b58c7dc.mockapi.io/MealsApi/users") // my custom api
+        .then((response) => response.json())
+        .then((data) => {
+          gridOptions.api.setRowData(data);
+        });
+    </script>
+  </body>
+</html>
