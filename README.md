@@ -1,4 +1,4 @@
-# PocUsingLibraries
+# Control-Libraries-Poc
 HTML + Javascript 
 
 This is project Exploring Javascript Libraries for HTML5 Those i have implimented libraries are [Ag-Grid](https://www.ag-grid.com/), [ChartJS](https://www.chartjs.org/) and [Bootstrap](https://getbootstrap.com/).
