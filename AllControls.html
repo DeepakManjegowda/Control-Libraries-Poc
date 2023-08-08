@@ -1,24 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Controls</title>
+    <!-- Include the JS for AG Grid -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <!-- Include the core CSS, this is needed by the grid -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css"
+    />
+    <!-- Include the theme CSS, only need to import the theme you are going to use -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css"
+    />
+    <!--Include the JS for Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Add the D3.js script tag -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Include the core CSS bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Include the core CSS docs bootstrap -->
     <link
       href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
       rel="stylesheet"
     />
-    <title>Bootstrap Example</title>
+    <!-- Add the bootstrap script tag -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!--some custome css for file uploading-->
+    <link rel="stylesheet" href="fileupload.css" />
   </head>
   <body>
-    <div class="p-3 m-0 border-0 bd-example m-0 border-0">
-      <div class="p-2 fw-semibold fs-4">
-        This is Form Input Controls and Validation
+    <!-- Data Grid -->
+    <div class="p-3">
+      <h1>Data Table</h1>
+      <p>This table is using <b>Ag-Grid </b></p>
+      <div style="display: flex; justify-content: center; padding: 20px">
+        <div
+          id="myGrid"
+          class="ag-theme-alpine"
+          style="height: 450px; width: 100%"
+        ></div>
       </div>
+    </div>
+
+    <!-- Charts  -->
+    <div class="p-3">
+      <h1>Charts</h1>
+
+      <h4>Using Chart Js</h4>
+      <div style="display: flex; justify-content: center; margin-top: 30px">
+        <div style="width: 700px"><canvas id="myChart"></canvas></div>
+      </div>
+
+      <h4 style="margin-top: 10px">Using D3 js</h4>
+      <div style="display: flex; justify-content: center; margin-top: 30px">
+        <div style="width: 700px"><svg id="d3Chart"></svg></div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Inputs -->
+    <div class="p-3 m-0 border-0 bd-example m-0 border-0">
+      <h1>Forms</h1>
       <form class="row g-3 needs-validation" novalidate="">
         <div class="col-md-4">
           <label for="validationCustom01" class="form-label">First name</label>
@@ -27,7 +76,7 @@
             class="form-control"
             id="validationCustom01"
             value=""
-            required=""
+            required
           />
           <div class="valid-feedback">Looks good!</div>
           <div class="invalid-feedback">Please give a First Name.</div>
@@ -39,7 +88,7 @@
             class="form-control"
             id="validationCustom02"
             value=""
-            required=""
+            required
           />
           <div class="valid-feedback">Looks good!</div>
           <div class="invalid-feedback">Please give a Last Name.</div>
@@ -52,7 +101,7 @@
               type="email"
               class="form-control"
               id="validationCustomEmail"
-              required=""
+              required
             />
             <div class="valid-feedback">Looks good!</div>
             <div class="invalid-feedback">Please Enter valid a Email.</div>
@@ -64,7 +113,7 @@
             type="password"
             class="form-control"
             id="validationCustomPwd"
-            required=""
+            required
           />
 
           <div class="invalid-feedback">Please provide a valid Password.</div>
@@ -75,13 +124,13 @@
             type="text"
             class="form-control"
             id="validationCustom03"
-            required=""
+            required
           />
           <div class="invalid-feedback">Please provide a valid city.</div>
         </div>
         <div class="col-md-3">
           <label for="validationCustom04" class="form-label">State</label>
-          <select class="form-select" id="validationCustom04" required="">
+          <select class="form-select" id="validationCustom04" required>
             <option selected="" disabled="" value="">Choose State</option>
             <option>Karnataka</option>
             <option>Gujarath</option>
@@ -95,7 +144,7 @@
             type="number"
             class="form-control"
             id="validationCustom05"
-            required=""
+            required
           />
           <div class="invalid-feedback">Please provide a valid zip.</div>
         </div>
@@ -106,7 +155,7 @@
               type="checkbox"
               value=""
               id="invalidCheck"
-              required=""
+              required
             />
             <label class="form-check-label" for="invalidCheck">
               Agree to terms and conditions
@@ -121,24 +170,33 @@
         </div>
       </form>
     </div>
-    <script>
-      const forms = document.querySelectorAll(".needs-validation");
 
-      // Loop over them and prevent submission
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          "submit",
-          (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
+    <!--  File Uploading-->
+    <div class="p-3">
+      <h3>File Uploading</h3>
+      <form class="form-file" enctype="multipart/form-data">
+        <div class="image-input">
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Files:</label>
+            <input
+              class="form-control"
+              accept="image/*"
+              type="file"
+              id="formFileMultiple"
+              onchange="getBase64(event)"
+              multiple
+            />
+          </div>
+          <div class="img-preview">
+            <img id="blob" src="#" alt="your image" />
+          </div>
+        </div>
+        <div class="upload-button">
+          <button class="btn btn-primary">Upload</button>
+        </div>
+      </form>
+    </div>
 
-            form.classList.add("was-validated");
-          },
-          false
-        );
-      });
-    </script>
+    <script src="AllControls.js"></script>
   </body>
 </html>
